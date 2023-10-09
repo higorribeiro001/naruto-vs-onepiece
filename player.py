@@ -133,7 +133,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = self.screen.get_height() / 2 + 40
 
     def up(self):
-        if self.rect.y > 180:
+        if self.rect.y >= 180:
             if self.atual > 1:
                 self.atual = 1
             self.rect.y -= 12
@@ -145,6 +145,8 @@ class Player(pygame.sprite.Sprite):
                 self.image_sprite_jump_left(int(self.atual))
 
             self.atual += 0.2
+        else:
+            self.down()
 
     def down(self):
         while self.rect.y != (self.screen.get_height() / 2):
