@@ -34,36 +34,13 @@ def menu_screen():
     mouse_pos = pygame.mouse.get_pos()
     if play_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
-            return "select_character"
+            return states["select_characters"]
     elif quit_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
             pygame.quit()
             sys.exit()
 
-    return "menu"
-
-
-def main(running=True):
-    current_screen = "menu"
-
-    if current_screen is None:
-        current_screen = "menu"
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        if current_screen == "menu":
-            current_screen = menu_screen()
-            pygame.display.flip()
-            clock.tick(60)
-        elif current_screen == "battle":
-            battle_screen()
-        elif current_screen == "select_character":
-            selection_screen()
-            pygame.display.flip()
-            clock.tick(60)
+    return states["menu"]
 
 
 def selection_screen():
@@ -98,9 +75,9 @@ def selection_screen():
                     selected_characters.append(characters[i])
 
     if len(selected_characters) == 2:
-        return battle_screen()  # Se dois personagens forem selecionados, vá para a tela de jogo
+        return states["battle"]  # Se dois personagens forem selecionados, vá para a tela de jogo
 
-    return "select_characters"
+    return states["select_characters"]
 
 
 def battle_screen(running=True):
@@ -313,12 +290,35 @@ if __name__ == '__main__':
     characters = ["Character1", "Character2", "Character3", "Character4", "Character5", "Character6"]
     selected_characters = []  # Personagens selecionados
 
+    # Estados do jogo
+    states = {
+        "menu": "menu",
+        "select_characters": "select_characters",
+        "battle": "battle",
+    }
+
+    current_screen = states["menu"]
+
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
     running = True
 
     group_sprite = pygame.sprite.Group()
 
-    main()
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        if current_screen == states["menu"]:
+            current_screen = menu_screen()
+        elif current_screen == states["select_characters"]:
+            current_screen = selection_screen()
+        elif current_screen == states["battle"]:
+            battle_screen()
+
+        pygame.display.flip()
+        clock.tick(60)
 
     pygame.quit()
+    sys.exit()
