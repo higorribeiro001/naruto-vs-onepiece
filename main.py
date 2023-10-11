@@ -34,7 +34,7 @@ def menu_screen():
     mouse_pos = pygame.mouse.get_pos()
     if play_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
-            return "battle"
+            return "select_character"
     elif quit_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
             pygame.quit()
@@ -45,6 +45,9 @@ def menu_screen():
 
 def main(running=True):
     current_screen = "menu"
+
+    if current_screen is None:
+        current_screen = "menu"
 
     while running:
         for event in pygame.event.get():
@@ -57,9 +60,47 @@ def main(running=True):
             clock.tick(60)
         elif current_screen == "battle":
             battle_screen()
+        elif current_screen == "select_character":
+            selection_screen()
+            pygame.display.flip()
+            clock.tick(60)
 
-    pygame.display.flip()
-    clock.tick(60)
+
+def selection_screen():
+    screen.fill(WHITE)
+
+    # Desenhe o título
+    font = pygame.font.Font(None, 36)
+    title_text = font.render("Selecione Dois Personagens", True, BLACK)
+    title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 4))
+    screen.blit(title_text, title_rect)
+
+    # Desenhe os personagens
+    character_width, character_height = 150, 150
+    margin = 10
+    num_characters = len(characters)
+
+    for i in range(num_characters):
+        x = (i % 3) * (character_width + margin) + (WIDTH // 4)
+        y = (i // 3) * (character_height + margin) + (HEIGHT // 2)
+
+        character_rect = pygame.Rect(x, y, character_width, character_height)
+        pygame.draw.rect(screen, BLACK, character_rect)
+
+        character_text = font.render(characters[i], True, WHITE)
+        character_text_rect = character_text.get_rect(center=character_rect.center)
+        screen.blit(character_text, character_text_rect)
+
+        if character_rect.collidepoint(pygame.mouse.get_pos()):
+            pygame.draw.rect(screen, (0, 0, 255), character_rect, 3)  # Destacar personagem sob o cursor
+            if pygame.mouse.get_pressed()[0]:
+                if len(selected_characters) < 2 and characters[i] not in selected_characters:
+                    selected_characters.append(characters[i])
+
+    if len(selected_characters) == 2:
+        return battle_screen()  # Se dois personagens forem selecionados, vá para a tela de jogo
+
+    return "select_characters"
 
 
 def battle_screen(running=True):
@@ -77,8 +118,7 @@ def battle_screen(running=True):
                 p2.life -= damage
                 p2.damage()
 
-        if (-10 > dif_pos_left > -60 and dif_pos_y_p1 == dif_pos_y_p2) and keys[
-            pygame.K_DOWN] == False:
+        if (-10 > dif_pos_left > -60 and dif_pos_y_p1 == dif_pos_y_p2) and keys[pygame.K_DOWN] == False:
             if p2.life > 0:
                 p2.life -= damage
                 p2.damage()
@@ -173,14 +213,14 @@ def battle_screen(running=True):
                         p2.base()
                         p1.base()
 
-        screen.fill("cyan")
+        screen.fill(WHITE)
 
         group_sprite.draw(screen)
         group_sprite.update()
 
         # player 1
         font_p1 = pygame.font.Font(None, 30)
-        name_p1 = font_p1.render(p1.name_character, True, (255, 255, 255))
+        name_p1 = font_p1.render(p1.name_character, True, (0, 0, 0))
         name_p1_rect = name_p1.get_rect(center=(135, 100))  # posicionar o texto na tela
         screen.blit(name_p1, name_p1_rect)  # desenhar o texto na tela
         # vida
@@ -190,7 +230,7 @@ def battle_screen(running=True):
 
         # player 2
         font_p2 = pygame.font.Font(None, 30)
-        name_p2 = font_p2.render(p2.name_character, True, (255, 255, 255))
+        name_p2 = font_p2.render(p2.name_character, True, (0, 0, 0))
         name_p2_rect = name_p2.get_rect(center=(735, 100))  # posicionar o texto na tela
         screen.blit(name_p2, name_p2_rect)  # desenhar o texto na tela
         # vida
@@ -269,6 +309,9 @@ if __name__ == '__main__':
     WIDTH, HEIGHT = 980, 720
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
+
+    characters = ["Character1", "Character2", "Character3", "Character4", "Character5", "Character6"]
+    selected_characters = []  # Personagens selecionados
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
