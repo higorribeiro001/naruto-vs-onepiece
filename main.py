@@ -34,7 +34,7 @@ def menu_screen():
     mouse_pos = pygame.mouse.get_pos()
     if play_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
-            return "Battle"
+            return "battle"
     elif quit_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
             pygame.quit()
@@ -52,7 +52,9 @@ def main(running=True):
                 running = False
 
         if current_screen == "menu":
-            menu_screen()
+            current_screen = menu_screen()
+            pygame.display.flip()
+            clock.tick(60)
         elif current_screen == "battle":
             battle_screen()
 
@@ -275,4 +277,5 @@ if __name__ == '__main__':
     group_sprite = pygame.sprite.Group()
 
     main()
+
     pygame.quit()
