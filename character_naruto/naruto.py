@@ -200,3 +200,40 @@ class Naruto:
                 ]
             }
         ]
+    
+    def songs(self):
+        return [
+            {
+                'songs_punch': [
+                    'character_naruto/naruto_punch/sound_11_channels_1_frequency_22050.wav',
+                    'character_naruto/naruto_punch/sound_18_channels_1_frequency_22050.wav',
+                    'character_naruto/naruto_punch/sound_22_channels_1_frequency_22050.wav',
+                ]
+            },
+            {
+                'songs_kick': [
+                    pygame.mixer.music.load('character_naruto/naruto_kick/sound_12_channels_1_frequency_22050.wav'),
+                    pygame.mixer.music.load('character_naruto/naruto_kick/sound_22_channels_1_frequency_22050.wav'),
+                ]
+            },
+            {
+                'songs_chakra': [
+                    pygame.mixer.music.load('character_naruto/naruto_chakra/sound_29_channels_1_frequency_22050.wav')
+                ]
+            },
+            {
+                'songs_damage': [
+                    pygame.mixer.music.load('character_naruto/naruto_damage/sound_6_channels_1_frequency_22050.wav')
+                ]
+            },
+            {
+                'songs_dead': [
+                    pygame.mixer.music.load('character_naruto/naruto_dead/sound_9_channels_1_frequency_22050.wav')
+                ]
+            },
+            {
+                'songs_special': [
+                    pygame.mixer.music.load('character_naruto/naruto_special/R5.wav')
+                ]
+            },
+        ]

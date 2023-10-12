@@ -2,7 +2,7 @@ import pygame
 import time
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, screen, list_sprites, name, position_x, left_atack, right_atack):
+    def __init__(self, screen, list_sprites, name, position_x, left_atack, right_atack, songs):
         pygame.sprite.Sprite.__init__(self) # contrutor da classe Sprite
         self.screen = screen
         self.sprites_right = list_sprites[0]['sprites_right']
@@ -26,7 +26,16 @@ class Player(pygame.sprite.Sprite):
         self.sprites_dead_left = list_sprites[18]['sprites_dead_left']
         self.sprites_dead_right = list_sprites[19]['sprites_dead_right']
 
+        self.songs_punch = songs[0]['songs_punch']
+        self.songs_kick = songs[1]['songs_kick']
+        self.songs_chakra = songs[2]['songs_chakra']
+        self.songs_damage = songs[3]['songs_damage']
+        self.songs_dead = songs[4]['songs_dead']
+        self.songs_special = songs[5]['songs_special']
+
         self.atual = 0
+        self.index_song = 0
+        self.song = ''
 
         self.left_atack = left_atack
         self.right_atack = right_atack
@@ -182,6 +191,9 @@ class Player(pygame.sprite.Sprite):
     def punch(self):
         if self.atual > 5:
             self.atual = 0
+
+        if self.index_song > 2:
+            self.index_song = 0
         
         if self.right_atack:
             self.image_sprite_punch_right(int(self.atual))
@@ -189,7 +201,17 @@ class Player(pygame.sprite.Sprite):
         if self.left_atack:
             self.image_sprite_punch_left(int(self.atual))
 
+        self.song = self.songs_punch[self.index_song]
+
+        try:
+            print(pygame.mixer.music.load(self.song))
+            pygame.mixer.music.play()
+            print("musica toca")
+        except pygame.error as e:
+            print(e)
+
         self.atual += 0.3
+        self.index_song += 1
 
     def kick(self):
         if self.atual > 2:
