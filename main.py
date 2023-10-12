@@ -1,4 +1,5 @@
 import pygame
+import time
 from player import Player
 from character_naruto.naruto import Naruto
 from character_sasuke.sasuke import Sasuke
@@ -8,6 +9,11 @@ class Game:
         pygame.init()
         pygame.mixer.init()
 
+        song = 'soundtracks/naruto.mp3'
+        pygame.mixer.music.load(song)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.3)
+
         screen = pygame.display.set_mode((980, 720))
         clock = pygame.time.Clock()
         running = True
@@ -16,8 +22,10 @@ class Game:
 
         n = Naruto()
         s = Sasuke()
-        p1 = Player(screen, s.sprites(), s.__class__.__name__, 100, False, True, n.songs())
+        p1 = Player(screen, s.sprites(), s.__class__.__name__, 100, False, True, s.songs())
         p2 = Player(screen, n.sprites(), n.__class__.__name__, 820, True, False, n.songs())
+
+        pygame.mixer.Sound(s.songs()[6]['songs_opening']).play()
 
         group_sprite.add(p1)
         group_sprite.add(p2)
@@ -45,9 +53,6 @@ class Game:
                     p1.damage()
 
         while running:
-            song = 'naruto.mp3'
-            pygame.mixer.music.load(song)
-            pygame.mixer.music.play()
 
             dif_pos_x_right = p2.rect.topleft[0] - p1.rect.topright[0]
             dif_pos_x_left = p1.rect.topleft[0] - p2.rect.topright[0]
