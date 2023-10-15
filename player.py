@@ -263,7 +263,7 @@ class Player(pygame.sprite.Sprite):
             if self.left_atack:
                 self.image_sprite_dead_left(int(self.atual))
 
-            pygame.mixer.Sound(self.songs_kick).play()
+            pygame.mixer.Sound(self.songs_dead).play()
 
             self.atual += 0.3
 

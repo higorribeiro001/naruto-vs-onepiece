@@ -302,10 +302,17 @@ def battle_screen(running=True):
 
     pygame.quit()
 
+def song_game(music):
+    pygame.mixer.music.load(music)
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.3)
+
 
 if __name__ == "__main__":
     pygame.init()
     pygame.mixer.init()
+
+    song_game("soundtracks/opening4.mp3")
 
     WIDTH, HEIGHT = 980, 720
     WHITE = (255, 255, 255)
@@ -342,21 +349,15 @@ if __name__ == "__main__":
                 running = False
 
         if current_screen == states["menu"]:
-            song = "soundtracks/opening4.mp3"
-            pygame.mixer.music.load(song)
-            pygame.mixer.music.play(-1)
-            pygame.mixer.music.set_volume(0.3)
             current_screen = menu_screen()
         elif current_screen == states["select_characters"]:
             current_screen = selection_screen()
         elif current_screen == states["battle"]:
-            battle_screen()
             song = "soundtracks/naruto.mp3"
             pygame.mixer.Sound("soundtracks/opening_sasuke.wav").play()
-            pygame.mixer.music.load(song)
-            pygame.mixer.music.play(-1)
-            pygame.mixer.music.set_volume(0.3)
-
+            song_game(song)
+            battle_screen()
+            
         pygame.display.flip()
         clock.tick(60)
 
