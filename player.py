@@ -143,13 +143,11 @@ class Player(pygame.sprite.Sprite):
 
     def image_sprite_dead_left(self, atual):
         self.image = self.sprites_dead_left[atual]
-        self.image = pygame.transform.scale(self.image, (30 * 2, 40))
-        self.rect.y = self.screen.get_height() / 2 + 40
+        self.image = pygame.transform.scale(self.image, (30 * 2, 40 * 2))
 
     def image_sprite_dead_right(self, atual):
         self.image = self.sprites_dead_right[atual]
-        self.image = pygame.transform.scale(self.image, (30 * 2, 40))
-        self.rect.y = self.screen.get_height() / 2 + 40
+        self.image = pygame.transform.scale(self.image, (30 * 2, 40 * 2))
 
     def up(self):
         while self.rect.y > 200:
