@@ -93,11 +93,13 @@ def selection_screen():
 
 
 def battle_screen(running, clock):
-    end_game = False
+    image = pygame.image.load("images/Vale_do_fim_pixelado.jpg")
+    image = pygame.transform.scale(image, (980, 720))
+
     n = Naruto()
     s = Sasuke()
-    p1 = Player(screen, s.sprites(), s.__class__.__name__, 100, False, True, s.songs())
-    p2 = Player(screen, n.sprites(), n.__class__.__name__, 820, True, False, n.songs())
+    p1 = Player(screen, s.sprites(), s.__class__.__name__, 220, False, True, s.songs())
+    p2 = Player(screen, n.sprites(), n.__class__.__name__, 720, True, False, n.songs())
 
     group_sprite.add(p1)
     group_sprite.add(p2)
@@ -142,8 +144,8 @@ def battle_screen(running, clock):
     def down(player, acceleration_y):
         player.rect.y += acceleration_y
 
-        if player.rect.y > screen.get_height() / 2:
-            player.rect.y = 360
+        if player.rect.y > (screen.get_height() / 2) + 60:
+            player.rect.y = (screen.get_height() / 2) + 60
             acceleration_y = 0
             time = pygame.time.Clock()
 
@@ -225,7 +227,7 @@ def battle_screen(running, clock):
                         p2.base()
                         p1.base()
 
-        screen.fill(WHITE)
+        screen.blit(image, (0, 0))
 
         group_sprite.draw(screen)
         group_sprite.update()
@@ -256,10 +258,10 @@ def battle_screen(running, clock):
         if keys[pygame.K_w]:
             acceleration_y = p1.up()
 
-        if keys[pygame.K_d] and p1.rect.y == screen.get_height() / 2:
+        if keys[pygame.K_d] and p1.rect.y == (screen.get_height() / 2) + 60:
             p1.right()
 
-        if keys[pygame.K_a] and p1.rect.y == screen.get_height() / 2:
+        if keys[pygame.K_a] and p1.rect.y == (screen.get_height() / 2) + 60:
             p1.left()
 
         if keys[pygame.K_g]:
@@ -287,10 +289,10 @@ def battle_screen(running, clock):
         if keys[pygame.K_UP]:
             acceleration_y2 = p2.up()
 
-        if keys[pygame.K_RIGHT] and p2.rect.y == screen.get_height() / 2:
+        if keys[pygame.K_RIGHT] and p2.rect.y == (screen.get_height() / 2) + 60:
             p2.right()
 
-        if keys[pygame.K_LEFT] and p2.rect.y == screen.get_height() / 2:
+        if keys[pygame.K_LEFT] and p2.rect.y == (screen.get_height() / 2) + 60:
             p2.left()
 
         if keys[pygame.K_i]:

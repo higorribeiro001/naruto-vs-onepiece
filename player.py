@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()  # retangulo ao qual a imagem está alocada
         self.rect.topleft = (
             position_x,
-            self.screen.get_height() / 2,
+            (self.screen.get_height() / 2) + 60,
         )  # onde vai ficar a parte superior esquerda do retangulo
 
         self.life = 200
@@ -221,8 +221,6 @@ class Player(pygame.sprite.Sprite):
 
         if self.stamina < 200:
             self.stamina += 1
-
-        # pygame.mixer.Sound(self.songs_chakra).play()
 
     def special(self):
         if self.atual > 30:
