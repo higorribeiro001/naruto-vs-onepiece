@@ -2,7 +2,7 @@ import pygame
 import time
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, screen, list_sprites, name, position_x, left_atack, right_atack):
+    def __init__(self, screen, list_sprites, name, position_x, left_atack, right_atack, songs):
         pygame.sprite.Sprite.__init__(self) # contrutor da classe Sprite
         self.screen = screen
         self.sprites_right = list_sprites[0]['sprites_right']
@@ -25,6 +25,13 @@ class Player(pygame.sprite.Sprite):
         self.sprites_damage_left = list_sprites[17]['sprites_damage_left']
         self.sprites_dead_left = list_sprites[18]['sprites_dead_left']
         self.sprites_dead_right = list_sprites[19]['sprites_dead_right']
+
+        self.songs_punch = songs[0]['songs_punch']
+        self.songs_kick = songs[1]['songs_kick']
+        self.songs_chakra = songs[2]['songs_chakra']
+        self.songs_damage = songs[3]['songs_damage']
+        self.songs_dead = songs[4]['songs_dead']
+        self.songs_special = songs[5]['songs_special']
 
         self.atual = 0
 
@@ -182,12 +189,14 @@ class Player(pygame.sprite.Sprite):
     def punch(self):
         if self.atual > 5:
             self.atual = 0
-        
+            
         if self.right_atack:
             self.image_sprite_punch_right(int(self.atual))
 
         if self.left_atack:
             self.image_sprite_punch_left(int(self.atual))
+
+        pygame.mixer.Sound(self.songs_punch).play()
 
         self.atual += 0.3
 
@@ -200,6 +209,8 @@ class Player(pygame.sprite.Sprite):
 
         if self.left_atack:
             self.image_sprite_kick_left(int(self.atual))
+
+        pygame.mixer.Sound(self.songs_kick).play()
 
         self.atual += 0.3
 
@@ -220,6 +231,8 @@ class Player(pygame.sprite.Sprite):
         if self.stamina < 200: 
             self.stamina += 0.5
 
+        # pygame.mixer.Sound(self.songs_chakra).play()
+
     def special(self):
         if self.atual > 30:
             self.stamina -= 100
@@ -237,6 +250,9 @@ class Player(pygame.sprite.Sprite):
             if self.atual > 16 and self.atual < 23:
                 self.rect.x -= 10
 
+        if self.atual > 25:
+            pygame.mixer.Sound(self.songs_special).play()
+
         self.atual += 0.2
 
     def dead(self):
@@ -246,6 +262,8 @@ class Player(pygame.sprite.Sprite):
 
             if self.left_atack:
                 self.image_sprite_dead_left(int(self.atual))
+
+            pygame.mixer.Sound(self.songs_kick).play()
 
             self.atual += 0.3
 
@@ -274,6 +292,8 @@ class Player(pygame.sprite.Sprite):
 
         if self.left_atack:
             self.image_sprite_damage_left(int(self.atual))
+
+        pygame.mixer.Sound(self.songs_damage).play()
 
         self.atual += 0.3
   

@@ -200,3 +200,28 @@ class Naruto:
                 ]
             }
         ]
+    
+    def songs(self):
+        return [
+            {
+                'songs_punch': 'character_naruto/naruto_punch/sound_11_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_kick': 'character_naruto/naruto_kick/sound_12_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_chakra': 'character_naruto/naruto_chakra/sound_29_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_damage': 'character_naruto/naruto_damage/sound_6_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_dead': 'character_naruto/naruto_dead/sound_9_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_special': 'character_naruto/naruto_special/R5.wav'
+            },
+            {
+                'songs_opening': 'character_naruto/opening_naruto.wav'
+            },
+        ]
