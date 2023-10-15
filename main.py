@@ -1,5 +1,5 @@
 import pygame
-import time
+import time as t
 from player import Player
 from character_naruto.naruto import Naruto
 from character_sasuke.sasuke import Sasuke
@@ -39,7 +39,7 @@ def menu_screen():
     mouse_pos = pygame.mouse.get_pos()
     if play_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
-            return states["select_characters"]
+            return states["battle"]
     elif quit_button.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0]:
             pygame.quit()
@@ -92,7 +92,8 @@ def selection_screen():
     return states["select_characters"]
 
 
-def battle_screen(running=True):
+def battle_screen(running, clock):
+    end_game = False
     n = Naruto()
     s = Sasuke()
     p1 = Player(screen, s.sprites(), s.__class__.__name__, 100, False, True, s.songs())
@@ -100,6 +101,13 @@ def battle_screen(running=True):
 
     group_sprite.add(p1)
     group_sprite.add(p2)
+
+    G = 16
+    time = clock
+    T = time.get_time() / 1000  # tempo em segundos
+    F = G * T
+    acceleration_y = 0
+    acceleration_y2 = 0
 
     def damage_p1(dif_pos_right, dif_pos_left, dif_pos_y_p1, dif_pos_y_p2, damage):
         if (-10 > dif_pos_right > -60 and dif_pos_y_p1 == dif_pos_y_p2) and keys[
@@ -131,11 +139,25 @@ def battle_screen(running=True):
                 p1.life -= 5
                 p1.damage()
 
+    def down(player, acceleration_y):
+        player.rect.y += acceleration_y
+
+        if player.rect.y > screen.get_height() / 2:
+            player.rect.y = 360
+            acceleration_y = 0
+            time = pygame.time.Clock()
+
     while running:
         dif_pos_x_right = p2.rect.topleft[0] - p1.rect.topright[0]
         dif_pos_x_left = p1.rect.topleft[0] - p2.rect.topright[0]
         dif_pos_y_p1 = p1.rect.topright[1]
         dif_pos_y_p2 = p2.rect.topleft[1]
+
+        acceleration_y += F
+        acceleration_y2 += F
+
+        down(p1, acceleration_y)
+        down(p2, acceleration_y2)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -157,9 +179,6 @@ def battle_screen(running=True):
                 else:
                     if event.key == pygame.K_a:
                         p1.base_left()
-
-                    if event.key == pygame.K_w:
-                        p1.down()
 
                     if event.key == pygame.K_d:
                         p1.base_right()
@@ -187,9 +206,6 @@ def battle_screen(running=True):
 
                     if event.key == pygame.K_LEFT:
                         p2.base_left()
-
-                    if event.key == pygame.K_UP:
-                        p2.down()
 
                     if event.key == pygame.K_i:
                         p2.base()
@@ -238,12 +254,12 @@ def battle_screen(running=True):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
-            p1.up()
+            acceleration_y = p1.up()
 
-        if keys[pygame.K_d]:
+        if keys[pygame.K_d] and p1.rect.y == screen.get_height() / 2:
             p1.right()
 
-        if keys[pygame.K_a]:
+        if keys[pygame.K_a] and p1.rect.y == screen.get_height() / 2:
             p1.left()
 
         if keys[pygame.K_g]:
@@ -269,12 +285,12 @@ def battle_screen(running=True):
                 )
 
         if keys[pygame.K_UP]:
-            p2.up()
+            acceleration_y2 = p2.up()
 
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] and p2.rect.y == screen.get_height() / 2:
             p2.right()
 
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] and p2.rect.y == screen.get_height() / 2:
             p2.left()
 
         if keys[pygame.K_i]:
@@ -300,7 +316,18 @@ def battle_screen(running=True):
 
         clock.tick(30)
 
+        if p1.life <= 0:
+            p1_win = pygame.mixer.Sound("soundtracks/sasuke_ending.wav").play()
+            if p1_win.get_busy() == 0:
+                break
+
+        if p2.life <= 0:
+            p2_win = pygame.mixer.Sound("soundtracks/naruto_ending.wav").play()
+            if p2_win.get_busy() == 0:
+                break
+
     pygame.quit()
+
 
 def song_game(music):
     pygame.mixer.music.load(music)
@@ -340,6 +367,7 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
     running = True
+    battle = True
 
     group_sprite = pygame.sprite.Group()
 
@@ -350,14 +378,14 @@ if __name__ == "__main__":
 
         if current_screen == states["menu"]:
             current_screen = menu_screen()
-        elif current_screen == states["select_characters"]:
-            current_screen = selection_screen()
+        # elif current_screen == states["select_characters"]:
+        #     current_screen = selection_screen()
         elif current_screen == states["battle"]:
             song = "soundtracks/naruto.mp3"
             pygame.mixer.Sound("soundtracks/opening_sasuke.wav").play()
             song_game(song)
-            battle_screen()
-            
+            battle = battle_screen(True, clock=clock)
+
         pygame.display.flip()
         clock.tick(60)
 
