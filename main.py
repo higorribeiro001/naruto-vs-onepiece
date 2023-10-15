@@ -316,15 +316,13 @@ def battle_screen(running, clock):
 
         clock.tick(30)
 
-        if p1.life <= 0:
-            p1_win = pygame.mixer.Sound("soundtracks/sasuke_ending.wav").play()
-            if p1_win.get_busy() == 0:
-                break
-
         if p2.life <= 0:
-            p2_win = pygame.mixer.Sound("soundtracks/naruto_ending.wav").play()
-            if p2_win.get_busy() == 0:
-                break
+            pygame.mixer.music.load("soundtracks/sasuke_ending.wav")
+            pygame.mixer.music.play()
+
+        if p1.life <= 0:
+            pygame.mixer.music.load("soundtracks/naruto_ending.wav")
+            pygame.mixer.music.play()
 
     pygame.quit()
 
