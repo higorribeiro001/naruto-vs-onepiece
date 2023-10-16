@@ -7,21 +7,25 @@ import sys
 
 
 def menu_screen():
-    screen.fill(WHITE)
+    image = pygame.image.load("images/capa_jogo.jpg")
+    image = pygame.transform.scale(image, (980, 720))
+    screen.blit(
+        image, (0, 0)
+    )  # (0,0) se refere aos parametros das bordas em seus eixos
 
     # Desenhe o título
     font = pygame.font.Font(None, 36)
-    title_text = font.render("Menu Principal", True, BLACK)
+    title_text = font.render("Naruto vs Sasuke", True, BLACK)
     title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 4))
     screen.blit(title_text, title_rect)
 
     # Desenhe os botões
     button_width, button_height = 200, 50
     play_button = pygame.Rect(
-        WIDTH // 2 - button_width // 2, HEIGHT // 2, button_width, button_height
+        WIDTH // 2 - button_width // 2, HEIGHT // 2 + 140, button_width, button_height
     )
     quit_button = pygame.Rect(
-        WIDTH // 2 - button_width // 2, HEIGHT // 2 + 70, button_width, button_height
+        WIDTH // 2 - button_width // 2, HEIGHT // 2 + 220, button_width, button_height
     )
 
     pygame.draw.rect(screen, BLACK, play_button)
@@ -255,13 +259,21 @@ def battle_screen(running, clock):
         pygame.display.flip()
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w] and p1.rect.y == 420:
             acceleration_y = p1.up()
 
-        if keys[pygame.K_d] and p1.rect.y == (screen.get_height() / 2) + 60:
+        if (
+            keys[pygame.K_d]
+            and p1.rect.y == (screen.get_height() / 2) + 60
+            and p1.rect.x <= 720
+        ):
             p1.right()
 
-        if keys[pygame.K_a] and p1.rect.y == (screen.get_height() / 2) + 60:
+        if (
+            keys[pygame.K_a]
+            and p1.rect.y == (screen.get_height() / 2) + 60
+            and p1.rect.x >= 220
+        ):
             p1.left()
 
         if keys[pygame.K_g]:
@@ -273,7 +285,6 @@ def battle_screen(running, clock):
 
         if keys[pygame.K_h]:
             p1.kick()
-
             damage_p1(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
         if keys[pygame.K_f]:
@@ -286,13 +297,21 @@ def battle_screen(running, clock):
                     dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 1
                 )
 
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] and p2.rect.y == 420:
             acceleration_y2 = p2.up()
 
-        if keys[pygame.K_RIGHT] and p2.rect.y == (screen.get_height() / 2) + 60:
+        if (
+            keys[pygame.K_RIGHT]
+            and p2.rect.y == (screen.get_height() / 2) + 60
+            and p2.rect.x <= 720
+        ):
             p2.right()
 
-        if keys[pygame.K_LEFT] and p2.rect.y == (screen.get_height() / 2) + 60:
+        if (
+            keys[pygame.K_LEFT]
+            and p2.rect.y == (screen.get_height() / 2) + 60
+            and p2.rect.x >= 220
+        ):
             p2.left()
 
         if keys[pygame.K_i]:
@@ -321,10 +340,12 @@ def battle_screen(running, clock):
     if p2.life <= 0:
         pygame.mixer.music.load("soundtracks/sasuke_ending.mp3")
         pygame.mixer.music.play()
+        return "menu"
 
     if p1.life <= 0:
         pygame.mixer.music.load("soundtracks/naruto_ending.mp3")
         pygame.mixer.music.play()
+        return "menu"
 
     pygame.quit()
 
@@ -367,7 +388,7 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
     running = True
-    battle = True
+    battle = None
 
     group_sprite = pygame.sprite.Group()
 
@@ -385,6 +406,9 @@ if __name__ == "__main__":
             pygame.mixer.Sound("soundtracks/opening_sasuke.wav").play()
             song_game(song)
             battle = battle_screen(True, clock=clock)
+
+        if battle == states["menu"]:
+            current_screen = menu_screen()
 
         pygame.display.flip()
         clock.tick(60)
