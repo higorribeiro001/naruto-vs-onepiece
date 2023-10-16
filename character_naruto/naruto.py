@@ -1,5 +1,6 @@
 import pygame
 
+
 class Naruto:
     def sprites(self):
         return [
@@ -103,72 +104,72 @@ class Naruto:
             },
             {
                 'sprites_special_right': [
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right1.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right2.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right3.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right4.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right5.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right6.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right7.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right8.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right9.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right10.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right11.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right12.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right13.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right14.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right15.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right16.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right17.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right18.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right19.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right20.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right21.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right22.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right23.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right24.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right25.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right26.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right27.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right28.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right29.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right30.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_right31.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right1.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right2.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right3.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right4.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right5.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right6.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right7.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right8.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right9.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right10.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right11.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right12.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right13.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right14.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right15.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right16.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right17.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right18.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right19.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right20.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right21.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right22.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right23.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right24.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right25.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right26.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right27.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right28.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right29.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right30.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_right31.png'),
                 ]
             },
             {
                 'sprites_special_left': [
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left1.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left2.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left3.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left4.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left5.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left6.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left7.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left8.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left9.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left10.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left11.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left12.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left13.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left14.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left15.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left16.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left17.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left18.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left19.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left20.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left21.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left22.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left23.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left24.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left25.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left26.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left27.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left28.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left29.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left30.png'),
-                    pygame.image.load('character_sasuke/sasuke_special/sasuke_special_left31.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left1.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left2.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left3.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left4.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left5.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left6.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left7.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left8.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left9.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left10.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left11.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left12.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left13.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left14.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left15.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left16.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left17.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left18.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left19.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left20.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left21.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left22.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left23.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left24.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left25.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left26.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left27.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left28.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left29.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left30.png'),
+                    pygame.image.load('character_naruto/naruto_special/naruto_special_left31.png'),
                 ]
             },
             {
@@ -199,4 +200,29 @@ class Naruto:
                     pygame.image.load('character_naruto/naruto_dead/naruto_dead_right3.png'),
                 ]
             }
+        ]
+
+    def songs(self):
+        return [
+            {
+                'songs_punch': 'character_naruto/naruto_punch/sound_11_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_kick': 'character_naruto/naruto_kick/sound_12_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_chakra': 'character_naruto/naruto_chakra/sound_29_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_damage': 'character_naruto/naruto_damage/sound_6_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_dead': 'character_naruto/naruto_dead/sound_9_channels_1_frequency_22050.wav'
+            },
+            {
+                'songs_special': 'character_naruto/naruto_special/R5.wav'
+            },
+            {
+                'songs_opening': 'character_naruto/opening_naruto.wav'
+            },
         ]

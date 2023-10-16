@@ -200,3 +200,28 @@ class Sasuke:
                 ]
             }
         ]
+    
+    def songs(self):
+        return [
+            {
+                'songs_punch': 'character_sasuke/sasuke_punch/sound_25_channels_1_frequency_18000.wav'
+            },
+            {
+                'songs_kick': 'character_sasuke/sasuke_kick/sound_34_channels_1_frequency_18000.wav'
+            },
+            {
+                'songs_chakra': 'character_sasuke/sasuke_chakra/sound_7_channels_1_frequency_18000.wav'
+            },
+            {
+                'songs_damage': 'character_sasuke/sasuke_damage/sound_35_channels_1_frequency_18000.wav'
+            },
+            {
+                'songs_dead': 'character_sasuke/sasuke_dead/sound_37_channels_1_frequency_18000.wav'
+            },
+            {
+                'songs_special': 'character_sasuke/sasuke_special/sound_49_channels_1_frequency_18000.wav'
+            },
+            {
+                'songs_opening': 'character_sasuke/opening_sasuke.wav'
+            },
+        ]
