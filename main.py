@@ -262,35 +262,35 @@ def battle_screen(running, clock):
         if keys[pygame.K_w] and p1.rect.y == 420:
             acceleration_y = p1.up()
 
-        if (
+        elif (
             keys[pygame.K_d]
             and p1.rect.y == (screen.get_height() / 2) + 60
             and p1.rect.x <= 720
         ):
             p1.right()
 
-        if (
+        elif (
             keys[pygame.K_a]
             and p1.rect.y == (screen.get_height() / 2) + 60
             and p1.rect.x >= 220
         ):
             p1.left()
 
-        if keys[pygame.K_g]:
+        elif keys[pygame.K_g]:
             p1.punch()
             damage_p1(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_s]:
+        elif keys[pygame.K_s]:
             p1.block()
 
-        if keys[pygame.K_h]:
+        elif keys[pygame.K_h]:
             p1.kick()
             damage_p1(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_f]:
+        elif keys[pygame.K_f]:
             p1.chakra()
 
-        if keys[pygame.K_j]:
+        elif keys[pygame.K_j]:
             if p1.stamina > 100:
                 p1.special()
                 damage_p1(
@@ -300,35 +300,35 @@ def battle_screen(running, clock):
         if keys[pygame.K_UP] and p2.rect.y == 420:
             acceleration_y2 = p2.up()
 
-        if (
+        elif (
             keys[pygame.K_RIGHT]
             and p2.rect.y == (screen.get_height() / 2) + 60
             and p2.rect.x <= 720
         ):
             p2.right()
 
-        if (
+        elif (
             keys[pygame.K_LEFT]
             and p2.rect.y == (screen.get_height() / 2) + 60
             and p2.rect.x >= 220
         ):
             p2.left()
 
-        if keys[pygame.K_i]:
+        elif keys[pygame.K_i]:
             p2.punch()
             damage_p2(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_DOWN]:
+        elif keys[pygame.K_DOWN]:
             p2.block()
 
-        if keys[pygame.K_o]:
+        elif keys[pygame.K_o]:
             p2.kick()
             damage_p2(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_u]:
+        elif keys[pygame.K_u]:
             p2.chakra()
 
-        if keys[pygame.K_p]:
+        elif keys[pygame.K_p]:
             if p2.stamina > 100:
                 p2.special()
                 damage_p2(
