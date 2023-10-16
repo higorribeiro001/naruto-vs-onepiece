@@ -1,9 +1,9 @@
 import pygame
-import time as t
+import sys
+
 from player import Player
 from character_naruto.naruto import Naruto
 from character_sasuke.sasuke import Sasuke
-import sys
 
 
 def menu_screen():
@@ -11,7 +11,7 @@ def menu_screen():
     image = pygame.transform.scale(image, (980, 720))
     screen.blit(
         image, (0, 0)
-    )  # (0,0) se refere aos parametros das bordas em seus eixos
+    )  # (0,0) se refere aos parametros das bordas nos seus eixos
 
     # Desenhe o título
     font = pygame.font.Font(None, 36)
@@ -83,8 +83,8 @@ def selection_screen():
             )  # Destacar personagem sob o cursor
             if pygame.mouse.get_pressed()[0]:
                 if (
-                    len(selected_characters) < 2
-                    and characters[i] not in selected_characters
+                        len(selected_characters) < 2
+                        and characters[i] not in selected_characters
                 ):
                     selected_characters.append(characters[i])
 
@@ -99,6 +99,10 @@ def selection_screen():
 def battle_screen(running, clock):
     image = pygame.image.load("images/Vale_do_fim_pixelado.jpg")
     image = pygame.transform.scale(image, (980, 720))
+
+    song = "soundtracks/naruto.mp3"
+    pygame.mixer.Sound("soundtracks/opening_sasuke.wav").play()
+    song_game(song)
 
     n = Naruto()
     s = Sasuke()
@@ -241,9 +245,9 @@ def battle_screen(running, clock):
         name_p1 = font_p1.render(p1.name_character, True, (0, 0, 0))
         name_p1_rect = name_p1.get_rect(center=(135, 100))  # posicionar o texto na tela
         screen.blit(name_p1, name_p1_rect)  # desenhar o texto na tela
-        # vida
+        # Life Bar
         pygame.draw.rect(screen, "green", (100, 120, p1.life, 20), border_radius=5)
-        # estamina
+        # Stamina Bar
         pygame.draw.rect(screen, "blue", (100, 145, p1.stamina, 10), border_radius=5)
 
         # player 2
@@ -262,35 +266,35 @@ def battle_screen(running, clock):
         if keys[pygame.K_w] and p1.rect.y == 420:
             acceleration_y = p1.up()
 
-        if (
-            keys[pygame.K_d]
-            and p1.rect.y == (screen.get_height() / 2) + 60
-            and p1.rect.x <= 720
+        elif (
+                keys[pygame.K_d]
+                and p1.rect.y == (screen.get_height() / 2) + 60
+                and p1.rect.x <= 720
         ):
             p1.right()
 
-        if (
-            keys[pygame.K_a]
-            and p1.rect.y == (screen.get_height() / 2) + 60
-            and p1.rect.x >= 220
+        elif (
+                keys[pygame.K_a]
+                and p1.rect.y == (screen.get_height() / 2) + 60
+                and p1.rect.x >= 220
         ):
             p1.left()
 
-        if keys[pygame.K_g]:
+        elif keys[pygame.K_g]:
             p1.punch()
             damage_p1(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_s]:
+        elif keys[pygame.K_s]:
             p1.block()
 
-        if keys[pygame.K_h]:
+        elif keys[pygame.K_h]:
             p1.kick()
             damage_p1(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_f]:
+        elif keys[pygame.K_f]:
             p1.chakra()
 
-        if keys[pygame.K_j]:
+        elif keys[pygame.K_j]:
             if p1.stamina > 100:
                 p1.special()
                 damage_p1(
@@ -300,35 +304,35 @@ def battle_screen(running, clock):
         if keys[pygame.K_UP] and p2.rect.y == 420:
             acceleration_y2 = p2.up()
 
-        if (
-            keys[pygame.K_RIGHT]
-            and p2.rect.y == (screen.get_height() / 2) + 60
-            and p2.rect.x <= 720
+        elif (
+                keys[pygame.K_RIGHT]
+                and p2.rect.y == (screen.get_height() / 2) + 60
+                and p2.rect.x <= 720
         ):
             p2.right()
 
-        if (
-            keys[pygame.K_LEFT]
-            and p2.rect.y == (screen.get_height() / 2) + 60
-            and p2.rect.x >= 220
+        elif (
+                keys[pygame.K_LEFT]
+                and p2.rect.y == (screen.get_height() / 2) + 60
+                and p2.rect.x >= 220
         ):
             p2.left()
 
-        if keys[pygame.K_i]:
+        elif keys[pygame.K_i]:
             p2.punch()
             damage_p2(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_DOWN]:
+        elif keys[pygame.K_DOWN]:
             p2.block()
 
-        if keys[pygame.K_o]:
+        elif keys[pygame.K_o]:
             p2.kick()
             damage_p2(dif_pos_x_right, dif_pos_x_left, dif_pos_y_p1, dif_pos_y_p2, 0.5)
 
-        if keys[pygame.K_u]:
+        elif keys[pygame.K_u]:
             p2.chakra()
 
-        if keys[pygame.K_p]:
+        elif keys[pygame.K_p]:
             if p2.stamina > 100:
                 p2.special()
                 damage_p2(
@@ -336,18 +340,62 @@ def battle_screen(running, clock):
                 )
 
         clock.tick(30)
+        if not (p1.life or p2.life <= 0):
+            break
+
+    print(f"P1 Life: {p1.life}")
+    print(f"P2 Life: {p2.life}")
 
     if p2.life <= 0:
         pygame.mixer.music.load("soundtracks/sasuke_ending.mp3")
         pygame.mixer.music.play()
-        return "menu"
+        return states["game_over"]
 
     if p1.life <= 0:
         pygame.mixer.music.load("soundtracks/naruto_ending.mp3")
         pygame.mixer.music.play()
-        return "menu"
+        return states["game_over"]
 
+    return states["battle"]
+
+
+def game_over_screen():
+    screen.fill(BLACK)
+
+    # Desenhe a tela de Game Over
+    font = pygame.font.Font(None, 170)
+    game_over_text = font.render("GAME OVER", True, WHITE)
+    game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 4))
+    screen.blit(game_over_text, game_over_rect)
+
+    # Lógica para voltar ao menu ou sair do jogo
+    font = pygame.font.Font(None, 24)
+    menu_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2, 200, 50)
+    quit_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 70, 200, 50)
+
+    pygame.draw.rect(screen, WHITE, menu_button)
+    menu_text = font.render("Voltar ao Menu", True, BLACK)
+    menu_text_rect = menu_text.get_rect(center=menu_button.center)
+    screen.blit(menu_text, menu_text_rect)
+
+    pygame.draw.rect(screen, WHITE, quit_button)
+    quit_text = font.render("Sair", True, BLACK)
+    quit_text_rect = quit_text.get_rect(center=quit_button.center)
+    screen.blit(quit_text, quit_text_rect)
+
+    # Lógica para detectar clique nos botões
+    if menu_button.collidepoint(pygame.mouse.get_pos()):
+        if pygame.mouse.get_pressed()[0]:
+            return states["menu"]
+
+    if quit_button.collidepoint(pygame.mouse.get_pos()):
+        if pygame.mouse.get_pressed()[0]:
+            pygame.quit()
+            sys.exit()
+
+    clock.tick(30)
     pygame.quit()
+    return states["game_over"]
 
 
 def song_game(music):
@@ -374,13 +422,14 @@ if __name__ == "__main__":
         "Character5",
         "Character6",
     ]
-    selected_characters = []  # Personagens selecionados
+    selected_characters = []
 
     # Estados do jogo
     states = {
         "menu": "menu",
         "select_characters": "select_characters",
         "battle": "battle",
+        "game_over": "game_over",
     }
 
     current_screen = states["menu"]
@@ -399,16 +448,16 @@ if __name__ == "__main__":
 
         if current_screen == states["menu"]:
             current_screen = menu_screen()
-        # elif current_screen == states["select_characters"]:
-        #     current_screen = selection_screen()
-        elif current_screen == states["battle"]:
-            song = "soundtracks/naruto.mp3"
-            pygame.mixer.Sound("soundtracks/opening_sasuke.wav").play()
-            song_game(song)
-            battle = battle_screen(True, clock=clock)
 
-        if battle == states["menu"]:
-            current_screen = menu_screen()
+        elif current_screen == states["select_characters"]:
+            current_screen = selection_screen()
+
+        elif current_screen == states["battle"]:
+            current_screen = battle = battle_screen(True, clock=clock)
+            print(f"current_screen: {current_screen}")
+
+        elif current_screen == states["game_over"]:
+            current_screen = game_over_screen()
 
         pygame.display.flip()
         clock.tick(60)

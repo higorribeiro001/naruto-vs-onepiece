@@ -1,5 +1,6 @@
 import pygame
 
+
 class Naruto:
     def sprites(self):
         return [
@@ -200,7 +201,7 @@ class Naruto:
                 ]
             }
         ]
-    
+
     def songs(self):
         return [
             {

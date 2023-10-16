@@ -4,7 +4,7 @@ import time
 
 class Player(pygame.sprite.Sprite):
     def __init__(
-        self, screen, list_sprites, name, position_x, left_atack, right_atack, songs
+            self, screen, list_sprites, name, position_x, left_atack, right_atack, songs
     ):
         pygame.sprite.Sprite.__init__(self)  # contrutor da classe Sprite
         self.screen = screen
