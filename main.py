@@ -343,9 +343,6 @@ def battle_screen(running, clock):
         if not (p1.life or p2.life <= 0):
             break
 
-    print(f"P1 Life: {p1.life}")
-    print(f"P2 Life: {p2.life}")
-
     if p2.life <= 0:
         pygame.mixer.music.load("soundtracks/sasuke_ending.mp3")
         pygame.mixer.music.play()
