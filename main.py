@@ -372,9 +372,15 @@ def game_over_screen():
     font = pygame.font.Font(None, 24)
     menu_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2, 200, 50)
     quit_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 70, 200, 50)
+    again_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 70, 200, 50)
 
     pygame.draw.rect(screen, WHITE, menu_button)
     menu_text = font.render("Voltar ao Menu", True, BLACK)
+    menu_text_rect = menu_text.get_rect(center=menu_button.center)
+    screen.blit(menu_text, menu_text_rect)
+
+    pygame.draw.rect(screen, WHITE, menu_button)
+    menu_text = font.render("Jogar Novamente", True, BLACK)
     menu_text_rect = menu_text.get_rect(center=menu_button.center)
     screen.blit(menu_text, menu_text_rect)
 
@@ -388,13 +394,15 @@ def game_over_screen():
         if pygame.mouse.get_pressed()[0]:
             return states["menu"]
 
+    if menu_button.collidepoint(pygame.mouse.get_pos()):
+        if pygame.mouse.get_pressed()[0]:
+            return states["battle"]
+
     if quit_button.collidepoint(pygame.mouse.get_pos()):
         if pygame.mouse.get_pressed()[0]:
             pygame.quit()
             sys.exit()
 
-    clock.tick(30)
-    pygame.quit()
     return states["game_over"]
 
 
@@ -454,7 +462,6 @@ if __name__ == "__main__":
 
         elif current_screen == states["battle"]:
             current_screen = battle = battle_screen(True, clock=clock)
-            print(f"current_screen: {current_screen}")
 
         elif current_screen == states["game_over"]:
             current_screen = game_over_screen()
